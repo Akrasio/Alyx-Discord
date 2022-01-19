@@ -14,7 +14,7 @@ import { AhniClient } from 'ahnidev';
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot`;
 const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
 const server = fastify({
-  logger: false,
+  logger: true,
 });
 server.register(rawBody, {
   runFirst: true,
@@ -85,7 +85,8 @@ server.post('/api/interactions', async (request, response) => {
           },
 	});
 	ahni.nsfw(message.data.options[0].value).then(IMGURL=>{
-        response.status(200).send({
+        console.log(IMGURL);
+	response.status(200).send({
           type: 4,
           data: {
             embeds: [embed.setImage(IMGURL).setURL(IMGURL)],
@@ -112,7 +113,7 @@ process.on("unhandledRejection", (err)=>{
 process.on("unhandledException", (err)=>{
 	console.log("Ooops! "+err.message)
 })
-server.listen(2003, async (error, address) => {
+server.listen(3001, async (error, address) => {
   if (error) {
     server.log.error(error);
 //    process.exit(1);
