@@ -89,7 +89,7 @@ server.post('/api/interactions', async (request, response) => {
 	response.status(200).send({
           type: 4,
           data: {
-            embeds: [embed.setImage(IMGURL).setURL(IMGURL)],
+            embeds: [embed.setImage(IMGURL.result).setURL(IMGURL.result)],
             flags: 64,
           },
         });
@@ -113,7 +113,7 @@ process.on("unhandledRejection", (err)=>{
 process.on("unhandledException", (err)=>{
 	console.log("Ooops! "+err.message)
 })
-server.listen(3001, async (error, address) => {
+server.listen(2003, async (error, address) => {
   if (error) {
     server.log.error(error);
 //    process.exit(1);

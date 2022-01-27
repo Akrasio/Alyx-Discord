@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ahnidev": "^1.0.1",
+    "ahnidev": "^1.0.4",
     "discord-interactions": "^2.4.1",
     "dotenv": "^14.2.0",
     "fastify": "^3.25.3",
