@@ -100,7 +100,7 @@ server.post('/api/interactions', async (request, response) => {
       case IMAGE_COMMAND.name.toLowerCase():
         member(message.guild_id, message.data.options[1].value).then(rez => {
           let avatar = `https://cdn.discordapp.com/avatars/${rez.user.id}/${rez.user.avatar}.png`
-          let IMGURL = `https://akira.gay/v2/images/${message.data.options[0].value}?image=${avatar}`
+          let IMGURL = `https://ahni.dev/v2/images/${message.data.options[0].value}?image=${avatar}`
           response.status(200).send({
             type: 4,
             data: {
