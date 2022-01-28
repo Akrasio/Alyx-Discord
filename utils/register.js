@@ -26,7 +26,6 @@ if (guildId && process.env.guildOnly == "true") {
   }
 } else {
   const response = await fetch(
-    // `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/guilds/${process.env.GUILDID}/commands`,
     `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/commands`,
     {
       headers: {
