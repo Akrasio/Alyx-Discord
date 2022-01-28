@@ -1,31 +1,31 @@
 export const SLAP_COMMAND = {
-  name: "slap",
-  description: "Sometimes you gotta slap a person with a large trout",
-  options: [
-    {
-      name: "user",
-      description: "The user to slap",
-      type: 6,
-      required: true,
-    },
-  ],
+    name: "slap",
+    description: "Sometimes you gotta slap a person with a large trout",
+    options: [
+        {
+            name: "user",
+            description: "The user to slap",
+            type: 6,
+            required: true,
+        },
+    ],
 };
 
 export const INVITE_COMMAND = {
-  name: "invite",
-  description: "Get an invite link to add the bot to your server",
+    name: "invite",
+    description: "Get an invite link to add the bot to your server",
 };
 
 export const NSFW_COMMAND = {
-  name: "nsfw",
-  description: "Have some lewds",
-  options: [
-    {
-      name: "category",
-      description: "The type of lewds you want",
-      type: 3,
-      required: true,
-      choices: [
+    name: "nsfw",
+    description: "Have some lewds",
+    options: [
+        {
+            name: "category",
+            description: "The type of lewds you want",
+            type: 3,
+            required: true,
+            choices: [
                 {
                     "name": "ass-real",
                     "value": "ass"
@@ -123,7 +123,92 @@ export const NSFW_COMMAND = {
                     "value": "yuri"
                 }
             ]
-    },
-  ],
+        },
+    ],
+};
+
+export const IMAGE_COMMAND = {
+    name: "image",
+    description: "Apply a fun filter to an image/avatar url.",
+    options: [
+        {
+            name: "category",
+            description: "The of filter you want to add.",
+            type: 3,
+            required: true,
+            choices: [
+                {
+                    "name": "ad",
+                    "value": "ad"
+                },
+                {
+                    "name": "bisexual",
+                    "value": "bisexual"
+                },
+                {
+                    "name": "captcha",
+                    "value": "captcha"
+                },
+                {
+                    "name": "delete",
+                    "value": "delete"
+                },
+                {
+                    "name": "discordblue",
+                    "value": "discordblue"
+                },
+                {
+                    "name": "firsttime",
+                    "value": "firsttime"
+                },
+                {
+                    "name": "gay",
+                    "value": "gay"
+                },
+                {
+                    "name": "hitler",
+                    "value": "hitler"
+                },
+                {
+                    "name": "jail",
+                    "value": "jail"
+                },
+                {
+                    "name": "jokeoverhead",
+                    "value": "jokeoverhead"
+                },
+                {
+                    "name": "kimborder",
+                    "value": "kimborder"
+                },
+                {
+                    "name": "nonbinary",
+                    "value": "nonbinary"
+                },
+                {
+                    "name": "pansexual",
+                    "value": "pansexual"
+                },
+                {
+                    "name": "rip",
+                    "value": "rip"
+                },
+                {
+                    "name": "sepia",
+                    "value": "sepia"
+                },
+                {
+                    "name": "transgender",
+                    "value": "transgender"
+                }
+            ]
+        },
+        {
+            name: "member",
+            description: "The member you want to add a filter to.",
+            type: 6,
+            required: true
+        },
+    ],
 };
 

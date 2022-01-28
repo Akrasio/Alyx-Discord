@@ -8,13 +8,13 @@ import {
   verifyKey,
 } from 'discord-interactions';
 import { MessageEmbed } from 'discord.js';
-import { SLAP_COMMAND, INVITE_COMMAND, NSFW_COMMAND } from './utils/commands.js';
+import { SLAP_COMMAND, INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from './utils/commands.js';
 dotenv.config()
 import { AhniClient } from 'ahnidev';
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot`;
 const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
 const server = fastify({
-  logger: true,
+  logger: false,
 });
 server.register(rawBody, {
   runFirst: true,
@@ -24,9 +24,9 @@ server.get('/api/interactions', (request, response) => {
   console.log('Handling GET request');
 });
 const embed = new MessageEmbed()
-	.setTitle('Here you go:')
-	.setTimestamp()
-	.setColor("RANDOM");
+  .setTitle('Here you go:')
+  .setTimestamp()
+  .setColor("RANDOM");
 
 server.addHook('preHandler', async (request, response) => {
   // We don't want to check GET requests to our root url
@@ -53,7 +53,7 @@ server.post('/api/interactions', async (request, response) => {
     response.send({
       type: InteractionResponseType.PONG,
     });
-}
+  }
   else if (message.type === InteractionType.APPLICATION_COMMAND) {
     switch (message.data.name.toLowerCase()) {
       case SLAP_COMMAND.name.toLowerCase():
@@ -76,27 +76,41 @@ server.post('/api/interactions', async (request, response) => {
         server.log.info('Invite request');
         break;
       case NSFW_COMMAND.name.toLowerCase():
-	nsfw(message.channel_id).then(nsfws =>{
-	if (nsfws.nsfw == false) return response.status(200).send({
-          type: 4,
-          data: {
-            content: "This Channel is __NOT__ an NSFW channel!",
-            flags: 64,
-          },
-	});
-	ahni.nsfw(message.data.options[0].value).then(IMGURL=>{
-        console.log(IMGURL);
-	response.status(200).send({
-          type: 4,
-          data: {
-            embeds: [embed.setImage(IMGURL.result).setURL(IMGURL.result)],
-            flags: 64,
-          },
+        nsfw(message.channel_id).then(nsfws => {
+          if (nsfws.nsfw == false) return response.status(200).send({
+            type: 4,
+            data: {
+              content: "This Channel is __NOT__ an NSFW channel!",
+              flags: 64,
+            },
+          });
+          ahni.nsfw(message.data.options[0].value).then(IMGURL => {
+            console.log(IMGURL);
+            response.status(200).send({
+              type: 4,
+              data: {
+                embeds: [embed.setImage(IMGURL.result).setURL(IMGURL.result)],
+                flags: 64,
+              },
+            });
+          });
+          console.log('NSFW Command Ran');
+        })
+        break;
+      case IMAGE_COMMAND.name.toLowerCase():
+        member(message.guild_id, message.data.options[1].value).then(rez => {
+          let avatar = `https://cdn.discordapp.com/avatars/${rez.user.id}/${rez.user.avatar}.png`
+          let IMGURL = `https://akira.gay/v2/images/${message.data.options[0].value}?image=${avatar}`
+          response.status(200).send({
+            type: 4,
+            data: {
+              embeds: [embed.setImage(IMGURL).setURL(IMGURL)],
+              flags: 64,
+            },
+          });
         });
-	});
-	console.log('NSFW Command Ran');
-      })
-      break;
+        console.log('Image Command Ran');
+        break;
       default:
         server.log.error('Unknown Command');
         response.status(400).send({ error: 'Unknown Type' });
@@ -107,28 +121,40 @@ server.post('/api/interactions', async (request, response) => {
     response.status(400).send({ error: 'Unknown Type' });
   }
 });
-process.on("unhandledRejection", (err)=>{
-	console.log("Ooops! "+err.message)
+process.on("unhandledRejection", (err) => {
+  console.log("Ooops! " + err.message)
 })
-process.on("unhandledException", (err)=>{
-	console.log("Ooops! "+err.message)
+process.on("unhandledException", (err) => {
+  console.log("Ooops! " + err.message)
 })
-server.listen(2003, async (error, address) => {
+server.listen(process.env.PORT, async (error, address) => {
   if (error) {
     server.log.error(error);
-//    process.exit(1);
+    //    process.exit(1);
   }
   server.log.info(`server listening on ${address}`);
 });
 
-function nsfw(id){
-return fetch(`https://discord.com/api/v9/channels/${id}`, {
- 	method: 'GET',
-	headers: {
-		"Authorization": "Bot "+process.env.TOKEN,
-		"Content-Type": "application/json"
-	}
-	}).then(res =>res.json()).then(json=>{
-		return json
-	});
+function nsfw(id) {
+  return fetch(`https://discord.com/api/v9/channels/${id}`, {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bot " + process.env.TOKEN,
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json()).then(json => {
+    return json
+  });
 }
+function member(guildId, userId) {
+  return fetch(`https://discord.com/api/v9/guilds/${guildId}/members/${userId}`, {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bot " + process.env.TOKEN,
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json()).then(json => {
+    return json
+  });
+}
+

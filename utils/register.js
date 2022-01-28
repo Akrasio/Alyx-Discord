@@ -1,18 +1,18 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 dotenv.config();
-import { INVITE_COMMAND, NSFW_COMMAND } from "./commands.js";
+import { INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from "./commands.js";
 
 const guildId = process.env.GUILDID;
 const response = await fetch(
-  `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/commands`,
+  `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/guilds/${process.env.GUILDID}/commands`,
   {
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bot ${process.env.TOKEN}`,
     },
     method: "PUT",
-    body: JSON.stringify([NSFW_COMMAND, INVITE_COMMAND]),
+    body: JSON.stringify([NSFW_COMMAND, INVITE_COMMAND, IMAGE_COMMAND]),
   }
 );
 
