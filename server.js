@@ -104,7 +104,7 @@ server.post('/api/interactions', async (request, response) => {
           response.status(200).send({
             type: 4,
             data: {
-              embeds: [embed.setImage(IMGURL).setURL(IMGURL)],
+              embeds: [embed.setImage(IMGURL).setURL(IMGURL.split(" ").join("%20"))],
               flags: 64,
             },
           });
