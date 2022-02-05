@@ -121,7 +121,7 @@ server.post('/api/interactions', async (request, response) => {
     response.status(400).send({ error: 'Unknown Type' });
   }
 });
-    
+
 process.on("unhandledRejection", (err) => {
   console.log("Ooops! " + err.message)
 })
@@ -162,10 +162,10 @@ function member(guildId, userId) {
 import { Client } from "discord.js";
 const bots = new Client({ presence: { status: "invisible" }, intents: ['GUILDS'] });
 
-bots.on("ready", ()=>{
+bots.on("ready", () => {
   const replies = ["https://cdn.discordapp.com/attachments/763593786118504529/939641798802944051/2.jpg", "https://cdn.discordapp.com/attachments/763593786118504529/939641798450626680/1.jpg"]
   let avatarURL = Math.floor((Math.random() * replies.length));
-  setInterval(()=>{
+  setInterval(() => {
     bots.user.setAvatar(replies[avatarURL]);
   }, 1800000)
   console.log(avatarURL)
