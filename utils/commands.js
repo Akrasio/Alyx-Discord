@@ -76,7 +76,7 @@ export const NSFW_COMMAND = {
                 },
                 {
                     "name": "hboobs-hentai",
-                    "value": "hobbos"
+                    "value": "hboobs"
                 },
                 {
                     "name": "hentai",
@@ -93,6 +93,10 @@ export const NSFW_COMMAND = {
                 {
                     "name": "jackopose-hentai",
                     "value": "jackopose"
+                },
+                {
+                    "name": "latex-hentai",
+                    "value": "latex"
                 },
                 {
                     "name": "milk-hentai",

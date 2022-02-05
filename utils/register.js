@@ -4,9 +4,9 @@ dotenv.config();
 import { INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from "./commands.js";
 
 const guildId = process.env.GUILDID;
-if (guildId && process.env.guildOnly == "true") {
+if (guildId && process.env.guildOnly == 'true'){
   const response = await fetch(
-    `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/guilds/${process.env.GUILDID}/commands`,
+    `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/guilds/${guildId}/commands`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -18,13 +18,13 @@ if (guildId && process.env.guildOnly == "true") {
   );
 
   if (response.ok) {
-    console.log("Registered all guild commands");
+    console.log("Registered all global commands");
   } else {
     console.error("Error registering commands");
     const text = await response.text();
     console.error(text);
-  }
-} else {
+}
+}else{
   const response = await fetch(
     `https://discord.com/api/v9/applications/${process.env.APPLICATION_ID}/commands`,
     {
@@ -43,5 +43,5 @@ if (guildId && process.env.guildOnly == "true") {
     console.error("Error registering commands");
     const text = await response.text();
     console.error(text);
-  }
+}
 }
