@@ -161,14 +161,13 @@ function member(guildId, userId) {
 
 import { Client } from "discord.js";
 const bots = new Client({ presence: { status: "invisible" }, intents: ['GUILDS'] });
+const replies = ["https://cdn.discordapp.com/attachments/763593786118504529/939641798802944051/2.jpg", "https://cdn.discordapp.com/attachments/763593786118504529/939641798450626680/1.jpg"]
 
 bots.on("ready", () => {
-  const replies = ["https://cdn.discordapp.com/attachments/763593786118504529/939641798802944051/2.jpg", "https://cdn.discordapp.com/attachments/763593786118504529/939641798450626680/1.jpg"]
-  let avatarURL = Math.floor((Math.random() * replies.length));
   setInterval(() => {
+    let avatarURL = Math.floor((Math.random() * replies.length));
     bots.user.setAvatar(replies[avatarURL]);
+    console.log(replies[avatarURL])
   }, 1800000)
-  console.log(avatarURL)
-
 })
 bots.login(process.env.TOKEN)
