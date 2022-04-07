@@ -11,7 +11,7 @@ import { MessageEmbed } from 'discord.js';
 import { SLAP_COMMAND, INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from './utils/commands.js';
 dotenv.config()
 import { AhniClient } from 'ahnidev';
-const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot`;
+const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712`;
 const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
 const server = fastify({
   logger: false,
