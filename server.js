@@ -77,10 +77,10 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
         break;
       case NSFW_COMMAND.name.toLowerCase():
         nsfw(message.channel_id).then(nsfws => {
-          if (nsfws.nsfw == false) return response.status(200).send({
+	if (message.guild_id && nsfws.nsfw == false) return response.status(200).send({
             type: 4,
             data: {
-              content: "This Channel is __NOT__ an NSFW (non-thread) channel!",
+              content: "This Channel is __NOT__ an NSFW channel!",
               //flags: 64,
             },
           });
