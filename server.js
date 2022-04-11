@@ -11,7 +11,7 @@ import { MessageEmbed } from 'discord.js';
 import { SLAP_COMMAND, INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from './utils/commands.js';
 dotenv.config()
 import { AhniClient } from 'ahnidev';
-const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712`;
+const INVITE_URL = `[Invite](https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712)`;
 const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
 const server = fastify({
   logger: false,
@@ -70,7 +70,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
           type: 4,
           data: {
             content: INVITE_URL,
-            flags: 64,
+            //flags: 64,
           },
         });
         server.log.info('Invite request');
@@ -80,8 +80,8 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
           if (nsfws.nsfw == false) return response.status(200).send({
             type: 4,
             data: {
-              content: "This Channel is __NOT__ an NSFW channel!",
-              flags: 64,
+              content: "This Channel is __NOT__ an NSFW (non-thread) channel!",
+              //flags: 64,
             },
           });
           ahni.nsfw(message.data.options[0].value).then(IMGURL => {
@@ -90,7 +90,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
               type: 4,
               data: {
                 embeds: [embed.setImage(IMGURL.result).setURL(IMGURL.result.split(" ").join("%20"))],
-                flags: 64,
+                //flags: 64,
               },
             });
           });
@@ -105,7 +105,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
             type: 4,
             data: {
               embeds: [embed.setImage(IMGURL).setURL(IMGURL.split(" ").join("%20"))],
-              flags: 64,
+             // flags: 64,
             },
           });
         });
@@ -143,9 +143,14 @@ function nsfw(id) {
       "Content-Type": "application/json"
     }
   }).then(res => res.json()).then(json => {
-    return json
+	if (json.type == 11 && json.parent_id){
+	return nsfw(json.parent_id);
+	}
+	if (json.type == 0){
+    	return json
+	}
   });
-}
+};
 function member(guildId, userId) {
   return fetch(`https://discord.com/api/v9/guilds/${guildId}/members/${userId}`, {
     method: 'GET',
@@ -154,6 +159,7 @@ function member(guildId, userId) {
       "Content-Type": "application/json"
     }
   }).then(res => res.json()).then(json => {
+    console.log(json)
     return json
   });
 }
