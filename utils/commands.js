@@ -16,6 +16,30 @@ export const INVITE_COMMAND = {
     description: "Get an invite link to add the bot to your server",
 };
 
+export const ACTIVITY_COMMAND = {
+    name: "activity",
+    description: "Start a Voice Channel Activity!",
+    options: [
+        {
+            name: "type",
+            description: "The type of activity you want",
+            type: 3,
+            required: true,
+            choices: [
+                {
+		"name": "watch-together",
+		"value": "880218394199220334",
+		}
+	     ]
+	},
+	{
+	    name: "channel",
+	    description: "The voice channel you want to start the activity in",
+            required: true,
+	    type: 7,
+	    channel_types: [2],
+	}],
+}
 export const NSFW_COMMAND = {
     name: "nsfw",
     description: "Have some lewds",

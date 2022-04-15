@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 dotenv.config();
-import { INVITE_COMMAND, NSFW_COMMAND, IMAGE_COMMAND } from "./commands.js";
+import { INVITE_COMMAND, NSFW_COMMAND, ACTIVITY_COMMAND, IMAGE_COMMAND } from "./commands.js";
 
 const guildId = process.env.GUILDID;
 if (guildId && process.env.guildOnly == 'true'){
@@ -13,12 +13,12 @@ if (guildId && process.env.guildOnly == 'true'){
         "Authorization": `Bot ${process.env.TOKEN}`,
       },
       method: "PUT",
-      body: JSON.stringify([NSFW_COMMAND, INVITE_COMMAND, IMAGE_COMMAND]),
+      body: JSON.stringify([NSFW_COMMAND, INVITE_COMMAND, IMAGE_COMMAND, ACTIVITY_COMMAND ]),
     }
   );
 
   if (response.ok) {
-    console.log("Registered all global commands");
+    console.log("Registered all guild commands");
   } else {
     console.error("Error registering commands");
     const text = await response.text();
