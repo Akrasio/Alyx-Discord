@@ -15,7 +15,7 @@ import { AhniClient } from 'ahnidev';
 const INVITE_URL = `[Invite](https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712)`;
 const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
 const server = fastify({
-  logger: true,
+  logger: false,
 });
 server.register(rawBody, {
   runFirst: true,
