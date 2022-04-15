@@ -1,12 +1,14 @@
-const conf = {
+import fetch from "node-fetch";
+export const config = {
     functions: {
-        createTogetherCode: async function (voiceChannelId, option) {
+        createTogetherCode: async (voiceChannelId, option)=> {
             /**
              * @param {string} code The invite link (only use the blue link)
              */
             let returnData = {
                 code: 'none',
             };
+		console.log(voiceChannelId+" | "+option)
             if (option) {
                 let applicationID = option;
                 try {
@@ -21,7 +23,7 @@ const conf = {
                             validate: null,
                         }),
                         headers: {
-                            Authorization: `Bot ${this.client.token}`,
+                            Authorization: `Bot ${process.env.TOKEN}`,
                             'Content-Type': 'application/json',
                         },
                     })
