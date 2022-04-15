@@ -104,7 +104,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
               type: 4,
               data: {
                 embeds: [embed.setDescription(`Click to join [Activity](${url.code})`)],
-                flags: 64,
+                // flags: 64,
               },
             });
           console.log('ACTIVITY Command Ran');
