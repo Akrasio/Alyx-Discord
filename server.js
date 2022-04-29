@@ -13,7 +13,7 @@ import { config } from './utils/functions.js';
 dotenv.config()
 import { AhniClient } from 'ahnidev';
 const INVITE_URL = `[Invite](https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712)`;
-const ahni = new AhniClient({ KEY: process.env.AHNIKEY });
+const ahni = new AhniClient({ KEY: process.env.AHNIKEY, url: "http://127.0.0.1:2001" });
 const server = fastify({
   logger: false,
 });
@@ -113,7 +113,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
       case IMAGE_COMMAND.name.toLowerCase():
         config.member(message.guild_id, message.data.options[1].value).then(rez => {
           let avatar = `https://cdn.discordapp.com/avatars/${rez.user.id}/${rez.user.avatar}.png`
-          let IMGURL = `https://ahni.dev/v2/images/${message.data.options[0].value}?image=${avatar}`
+          let IMGURL = `http://127.0.0.1:2001/v2/images/${message.data.options[0].value}?image=${avatar}`
           response.status(200).send({
             type: 4,
             data: {
