@@ -13,7 +13,7 @@ import { config } from './utils/functions.js';
 dotenv.config()
 import { AhniClient } from 'ahnidev';
 const INVITE_URL = `[Invite](https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands%20bot&permissions=274945395712)`;
-const ahni = new AhniClient({ KEY: process.env.AHNIKEY, url: "http://127.0.0.1:2001" });
+const ahni = new AhniClient({ KEY: process.env.AHNIKEY, url: (process.env.url || "https://ahni.dev") });
 const server = fastify({
   logger: false,
 });
