@@ -125,7 +125,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
         config.functions.member(message.guild_id, message.data.options[1].value).then(rez => {
           let avatar = `https://cdn.discordapp.com/avatars/${rez?.user?.id}/${rez?.user?.avatar}.png`
           let IMGURL = `http://ahni.dev/v2/images/${message.data.options[0].value}&msg=${message.data?.options[1].value}`
-	  if (message.data.options[0].value !== "achievement") IMGURL = "http://ahbi.dev/v2/images/"+ message.data.options[0].value+"?image="+avatar
+	  if (message.data.options[0].value !== "achievement") IMGURL = "http://ahni.dev/v2/images/"+ message.data.options[0].value+"?image="+avatar
           response.status(200).send({
             type: 4,
             data: {
