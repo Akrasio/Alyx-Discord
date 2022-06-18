@@ -111,7 +111,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
         })
         break;
       case IMAGE_COMMAND.name.toLowerCase():
-	if (message.data.options[0].value = "achievement"){
+	if (message.data.options[0].value == "achievement"){
           let IMGURL = `https://ahni.dev/v2/images/${message.data.options[0].value}?msg=${message.data?.options[1].value.split(" ").join("%20")}`
           response.status(200).send({
             type: 4,
