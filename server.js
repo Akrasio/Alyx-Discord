@@ -111,9 +111,21 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
         })
         break;
       case IMAGE_COMMAND.name.toLowerCase():
-        config.member(message.guild_id, message.data.options[1].value).then(rez => {
-          let avatar = `https://cdn.discordapp.com/avatars/${rez.user.id}/${rez.user.avatar}.png`
-          let IMGURL = `http://127.0.0.1:2001/v2/images/${message.data.options[0].value}?image=${avatar}`
+	if (message.data.options[0].value = "achievement"){
+          let IMGURL = `https://ahni.dev/v2/images/${message.data.options[0].value}?msg=${message.data?.options[1].value.split(" ").join("%20")}`
+          response.status(200).send({
+            type: 4,
+            data: {
+              embeds: [embed.setImage(IMGURL).setURL(IMGURL.split(" ").join("%20"))],
+              flags: 64,
+            },
+          });
+        console.log('Image Command Ran');
+	} else {
+        config.functions.member(message.guild_id, message.data.options[1].value).then(rez => {
+          let avatar = `https://cdn.discordapp.com/avatars/${rez?.user?.id}/${rez?.user?.avatar}.png`
+          let IMGURL = `http://ahni.dev/v2/images/${message.data.options[0].value}&msg=${message.data?.options[1].value}`
+	  if (message.data.options[0].value !== "achievement") IMGURL = "http://ahbi.dev/v2/images/"+ message.data.options[0].value+"?image="+avatar
           response.status(200).send({
             type: 4,
             data: {
@@ -123,6 +135,7 @@ server.post(`/api/interactions/`+process.env.APPLICATION_ID, async (request, res
           });
         });
         console.log('Image Command Ran');
+	}
         break;
       default:
         server.log.error('Unknown Command');

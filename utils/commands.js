@@ -166,60 +166,24 @@ export const IMAGE_COMMAND = {
             required: true,
             choices: [
                 {
-                    "name": "ad",
-                    "value": "ad"
+                    "name": "achievement",
+                    "value": "achievement"
                 },
                 {
                     "name": "bisexual",
                     "value": "bisexual"
                 },
                 {
-                    "name": "captcha",
-                    "value": "captcha"
-                },
-                {
-                    "name": "delete",
-                    "value": "delete"
-                },
-                {
-                    "name": "discordblue",
-                    "value": "discordblue"
-                },
-                {
-                    "name": "firsttime",
-                    "value": "firsttime"
-                },
-                {
                     "name": "gay",
                     "value": "gay"
                 },
-                {
-                    "name": "hitler",
-                    "value": "hitler"
-                },
-                {
-                    "name": "jail",
-                    "value": "jail"
-                },
-                {
-                    "name": "jokeoverhead",
-                    "value": "jokeoverhead"
-                },
-                {
-                    "name": "kimborder",
-                    "value": "kimborder"
-                },
-                {
+		{
                     "name": "nonbinary",
                     "value": "nonbinary"
                 },
                 {
                     "name": "pansexual",
                     "value": "pansexual"
-                },
-                {
-                    "name": "rip",
-                    "value": "rip"
                 },
                 {
                     "name": "sepia",
@@ -232,10 +196,16 @@ export const IMAGE_COMMAND = {
             ]
         },
         {
+            name: "text",
+            description: "The text you want to add to an image.",
+            type: 3,
+            required: false,
+        },
+        {
             name: "member",
             description: "The member you want to add a filter to.",
             type: 6,
-            required: true
+            required: false
         },
     ],
 };

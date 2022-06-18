@@ -19,6 +19,7 @@
     "fastify": "^3.25.3",
     "fastify-raw-body": "^3.2.0",
     "lewds.api": "^2.4.2",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "simple-get": "^4.0.1"
   }
 }
