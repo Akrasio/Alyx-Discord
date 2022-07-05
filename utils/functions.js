@@ -8,11 +8,10 @@ export const config = {
             let returnData = {
                 code: 'none',
             };
-		console.log(voiceChannelId+" | "+option)
             if (option) {
                 let applicationID = option;
                 try {
-                    await fetch(`https://discord.com/api/v8/channels/${voiceChannelId}/invites`, {
+                    await fetch(`https://discord.com/api/v9/channels/${voiceChannelId}/invites`, {
                         method: 'POST',
                         body: JSON.stringify({
                             max_age: 86400,
@@ -41,7 +40,7 @@ export const config = {
                 throw new SyntaxError('Invalid option !');
             }
         },
-        nsfw: async function (id) {
+        nsfw: async function (id, guildId) {
             return fetch(`https://discord.com/api/v9/channels/${id}`, {
                 method: 'GET',
                 headers: {
@@ -54,7 +53,9 @@ export const config = {
                 }
                 if (json.type == 0) {
                     return json
-                }
+                } else if (json.type == 2){
+			return json
+		}
             });
         },
         member: async function (guildId, userId) {
@@ -65,7 +66,6 @@ export const config = {
                     "Content-Type": "application/json"
                 }
             }).then(res => res.json()).then(json => {
-                console.log(json)
                 return json
             });
         }
